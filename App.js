@@ -29,8 +29,8 @@ export default function App() {
         )[0];
         console.log("My Bus :");
         console.log(myBus.next.time);
-        setArrival(myBus.next.time);
-        setNextArrival(myBus.next2.time);
+        setArrival(myBus.next.duration_ms / 60000);
+        setNextArrival(myBus.next2.duration_ms / 60000);
         setLoading(false);
       });
   }
@@ -42,14 +42,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bus Arrival Time :</Text>
+      <Text style={styles.title}>Bus Arriving in</Text>
       <Text style={styles.arrivalTime}>
         {loading ? <ActivityIndicator size="large" color="red" /> : arrival}
       </Text>
-      <Text style={styles.title}>Bus Arrival Time :</Text>
-      <Text style={styles.arrivalTime}>
+      <Text style={styles.mins}>mins</Text>
+      <Text style={styles.title}>Next Bus Arriving in</Text>
+      <Text style={styles.nextArrivalTime}>
         {loading ? <ActivityIndicator size="large" color="red" /> : nextArrival}
       </Text>
+      <Text style={styles.mins}>mins</Text>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Refresh !</Text>
       </TouchableOpacity>
@@ -79,12 +81,30 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 30,
     fontWeight: "bold",
+    paddingTop: 30,
   },
   arrivalTime: {
-    color: "black",
     fontSize: 25,
     fontWeight: "bold",
     padding: 10,
-    paddingTop: 30,
+    paddingTop: 10,
+    paddingBottom: 0,
+    color: "red",
+  },
+  nextArrivalTime: {
+    fontSize: 25,
+    fontWeight: "bold",
+    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 0,
+    color: "blue",
+  },
+  mins: {
+    fontSize: 25,
+    fontWeight: "bold",
+    padding: 10,
+    paddingTop: 10,
+    paddingBottom: 0,
+    color: "black",
   },
 });
